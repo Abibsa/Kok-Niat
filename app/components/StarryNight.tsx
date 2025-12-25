@@ -59,12 +59,33 @@ export default function StarryNight({ onComplete }: StarryNightProps) {
         <div
             ref={containerRef}
             onClick={addStar}
-            className="fixed inset-0 bg-gray-900 cursor-pointer overflow-hidden z-50 flex items-center justify-center"
-            style={{ touchAction: 'none' }}
+            style={{
+                position: 'fixed',
+                inset: 0,
+                background: 'radial-gradient(circle at center, #2E1065 0%, #000000 100%)', // Deep Purple Galaxy
+                zIndex: 9999,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                overflow: 'hidden',
+                touchAction: 'none',
+                fontFamily: "'Times New Roman', serif"
+            }}
+
         >
-            <div className="absolute top-10 text-white text-center opacity-70 pointer-events-none">
+            <div style={{
+                position: 'absolute',
+                top: '2.5rem',
+                left: 0,
+                right: 0,
+                textAlign: 'center',
+                color: 'white',
+                opacity: 0.7,
+                pointerEvents: 'none'
+            }}>
                 <h2>Ketuk langit untuk harapan... 🌌</h2>
-                <p className="text-sm">(Ketuk 5 kali ya)</p>
+                <p style={{ fontSize: '0.875rem' }}>(Ketuk 5 kali ya)</p>
             </div>
 
             {stars.map((star) => (
@@ -72,28 +93,58 @@ export default function StarryNight({ onComplete }: StarryNightProps) {
                     key={star.id}
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    className="absolute flex flex-col items-center pointer-events-none"
-                    style={{ left: star.x, top: star.y, transform: 'translate(-50%, -50%)' }}
+                    style={{
+                        position: 'absolute',
+                        left: star.x,
+                        top: star.y,
+                        transform: 'translate(-50%, -50%)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        pointerEvents: 'none'
+                    }}
                 >
                     <span style={{ fontSize: '2rem', filter: 'drop-shadow(0 0 10px gold)' }}>🌟</span>
-                    <span className="text-white text-xs mt-1 font-bold shadow-black drop-shadow-md whitespace-nowrap">
+                    <span style={{
+                        color: 'white',
+                        fontSize: '0.75rem',
+                        marginTop: '0.25rem',
+                        fontWeight: 'bold',
+                        textShadow: '0 2px 4px rgba(0,0,0,0.5)',
+                        whiteSpace: 'nowrap'
+                    }}>
                         {star.text}
                     </span>
                 </motion.div>
             ))}
 
             <motion.div
-                className="absolute bottom-10 w-full text-center"
+                style={{
+                    position: 'absolute',
+                    bottom: '2.5rem',
+                    width: '100%',
+                    textAlign: 'center',
+                }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: stars.length >= 5 ? 1 : 0 }}
             >
                 <button
                     onClick={(e) => { e.stopPropagation(); onComplete(); }}
-                    className="bg-white text-gray-900 px-6 py-2 rounded-full font-bold hover:scale-105 transition-transform"
+                    style={{
+                        backgroundColor: 'white',
+                        color: '#111827',
+                        padding: '0.5rem 1.5rem',
+                        borderRadius: '9999px',
+                        fontWeight: 'bold',
+                        border: 'none',
+                        cursor: 'pointer',
+                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+                    }}
                 >
                     Lanjut ✨
                 </button>
             </motion.div>
         </div>
+
     );
 }

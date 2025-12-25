@@ -27,12 +27,19 @@ export default function MusicPlayer({ isPlaying, onToggle }: MusicPlayerProps) {
         setCurrentTrackIndex(nextIndex);
     };
 
-    // Play/Pause logic based on isPlaying prop
+    // Effect to handle track changes ONLY
     useEffect(() => {
         if (audioRef.current) {
-            // Reload audio source if track changes
             audioRef.current.load();
+            if (isPlaying) {
+                audioRef.current.play().catch(e => console.log("Auto-play blocked:", e));
+            }
+        }
+    }, [currentTrackIndex]);
 
+    // Effect to handle Play/Pause toggle
+    useEffect(() => {
+        if (audioRef.current) {
             if (isPlaying) {
                 const playPromise = audioRef.current.play();
                 if (playPromise !== undefined) {
@@ -44,7 +51,8 @@ export default function MusicPlayer({ isPlaying, onToggle }: MusicPlayerProps) {
                 audioRef.current.pause();
             }
         }
-    }, [isPlaying, currentTrackIndex]);
+    }, [isPlaying]);
+
 
     // Handle first interaction to bypass autoplay block
     useEffect(() => {

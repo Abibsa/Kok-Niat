@@ -36,12 +36,33 @@ export default function MoodBooster({ onComplete }: MoodBoosterProps) {
             <h2 className="mb-4">🎰 Mood Booster 🎰</h2>
             <p className="mb-4 text-sm text-gray-500">Lagi butuh apa hari ini? Coba putar deh!</p>
 
-            <div className="flex justify-center gap-2 mb-6">
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
                 {[0, 1, 2].map((i) => (
                     <motion.div
                         key={i}
-                        className="bg-white p-4 rounded-lg shadow-md border-2 border-pink-200 w-24 h-24 flex items-center justify-center text-center text-xs font-bold"
-                        animate={spinning ? { y: [0, -10, 0] } : {}}
+                        style={{
+                            width: 'clamp(4.5rem, 28vw, 6.5rem)',
+                            height: 'clamp(4.5rem, 28vw, 6.5rem)',
+                            background: 'rgba(255, 255, 255, 0.65)',
+                            backdropFilter: 'blur(10px)',
+                            borderRadius: '16px',
+                            border: '2px solid rgba(255, 182, 193, 0.5)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            textAlign: 'center',
+                            fontSize: 'clamp(0.7rem, 2.5vw, 0.9rem)',
+                            lineHeight: '1.2',
+                            fontWeight: 'bold',
+                            boxShadow: '0 8px 16px rgba(255, 105, 180, 0.15)',
+                            position: 'relative',
+                            overflow: 'hidden',
+                            padding: '0.25rem'
+                        }}
+                        animate={spinning ? {
+                            y: [0, -5, 0],
+                            borderColor: ['#FFB6C1', '#FF69B4', '#FFB6C1']
+                        } : {}}
                         transition={{ repeat: spinning ? Infinity : 0, duration: 0.2, delay: i * 0.1 }}
                     >
                         {result ? result[i] : spinning ? "..." : "❓"}
@@ -49,19 +70,33 @@ export default function MoodBooster({ onComplete }: MoodBoosterProps) {
                 ))}
             </div>
 
-            <div className="flex flex-col gap-3">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
                 <button
                     onClick={spin}
                     disabled={spinning}
-                    className="btn btn-primary w-full"
+                    className="btn"
+                    style={{
+                        position: 'relative',
+                        zIndex: 10,
+                        width: '100%',
+                        background: 'linear-gradient(135deg, #FF69B4 0%, #FFB6C1 100%)',
+                        color: 'white',
+                        boxShadow: '0 4px 15px rgba(255, 105, 180, 0.4)',
+                        border: 'none',
+                        padding: '1rem',
+                        borderRadius: '999px',
+                        cursor: 'pointer',
+                        fontWeight: '600'
+                    }}
                 >
-                    {spinning ? "Memutar..." : result ? "Putar Lagi 🔄" : "Putar Sekarang! 🎲"}
+                    {spinning ? "Sedang Mengacak... 🎲" : result ? "Putar Lagi 🔄" : "Putar Keberuntungan! ✨"}
                 </button>
 
                 {result && (
                     <button
-                        onClick={onComplete}
+                        onClick={() => { console.log("Lanjut ke Starry Night"); onComplete(); }}
                         className="btn btn-secondary w-full"
+                        style={{ position: 'relative', zIndex: 10 }}
                     >
                         Lanjut ✨
                     </button>

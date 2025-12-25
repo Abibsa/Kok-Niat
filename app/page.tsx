@@ -423,10 +423,7 @@ export default function Home() {
           </PageContainer>
         )}
 
-        {/* Step 6.2: Starry Night */}
-        {step === 6.2 && (
-          <StarryNight onComplete={() => setStep(7)} />
-        )}
+
 
 
         {/* Step 7: Ending */}
@@ -561,27 +558,36 @@ export default function Home() {
         )}
       </AnimatePresence>
 
+      {/* Step 6.2: Starry Night (Outside AnimatePresence for Fullscreen Portal Effect) */}
+      {step === 6.2 && (
+        <StarryNight onComplete={() => setStep(7)} />
+      )}
+
       {/* Signature Footer */}
-      <motion.footer
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.6 }}
-        transition={{ delay: 2, duration: 1 }}
-        style={{
-          position: 'fixed',
-          bottom: '1.5rem',
-          left: '0',
-          right: '0',
-          textAlign: 'center',
-          fontSize: '0.85rem',
-          color: 'var(--color-text-light)',
-          fontFamily: 'Poppins, sans-serif',
-          pointerEvents: 'none',
-          letterSpacing: '0.05em',
-          zIndex: 10,
-        }}
-      >
-        dibuat sama <span style={{ fontWeight: 600, color: 'var(--color-accent)' }}>abib</span> by love ❤️
-      </motion.footer>
+      {/* Signature Footer - Only on Last Step */}
+      {step === 8 && (
+        <motion.footer
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.8 }}
+          transition={{ delay: 1, duration: 1 }}
+          style={{
+            position: 'absolute', // Absolute relative to card/container usually better for end page
+            bottom: '2rem',
+            left: 0,
+            right: 0,
+            textAlign: 'center',
+            fontSize: '0.85rem',
+            color: 'var(--color-text-light)',
+            fontFamily: 'Poppins, sans-serif',
+            pointerEvents: 'none',
+            letterSpacing: '0.05em',
+            zIndex: 10,
+          }}
+        >
+          dibuat sama <span style={{ fontWeight: 600, color: 'var(--color-accent)' }}>abib</span> by love ❤️
+        </motion.footer>
+      )}
+
     </>
   );
 }

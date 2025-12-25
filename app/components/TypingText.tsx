@@ -19,15 +19,18 @@ export default function TypingText({ text, speed = 50, onComplete, className = '
     }, [text, speed, onComplete]);
 
     return (
-        <div className={className}>
+        <div className={`typing-text ${className}`}>
             {text.split('').map((char, index) => (
                 <span
                     key={index}
                     style={{
+                        display: 'inline-block',
                         animation: `fadeIn 0.1s ease-in forwards`,
                         animationDelay: `${index * speed}ms`,
                         opacity: 0,
+                        color: '#333'
                     }}
+
                 >
                     {char}
                 </span>
