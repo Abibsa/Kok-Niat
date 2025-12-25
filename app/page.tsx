@@ -129,8 +129,9 @@ export default function Home() {
   const handleAbsurdAnswer = (answer: string) => {
     playClick();
     setAnswers({ ...answers, [99]: answer });
-    setTimeout(() => setStep(step + 1), 1500); // Jeda lebih lama agar tidak kaget
+    setTimeout(() => setStep(5.1), 1500); // Langsung ke Mood Booster
   };
+
 
 
   const handleEndingChoice = () => {
@@ -373,52 +374,17 @@ export default function Home() {
           </PageContainer>
         )}
 
-        {/* Step 6: Plot Twist with Typing Animation */}
-        {step === 6 && (
-          <PageContainer key="step-6">
-            <ProgressIndicator currentStep={5} totalSteps={totalSteps} />
-            <motion.div className="card text-center">
-              <TypingText
-                text="Sebenernya ini bukan soal jawabannya…"
-                speed={50}
-                className="mb-4"
-                onComplete={() => setTimeout(() => setTypingComplete(true), 1000)}
-              />
-              {typingComplete && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 1 }}
-                >
-                  <TypingText
-                    text="Aku cuma pengen tau satu hal…"
-                    speed={50}
-                    className="mb-4"
-                  />
-                  <motion.button
-                    className="btn btn-primary mt-4"
-                    onClick={() => { playClick(); setStep(6.1); setTypingComplete(false); }}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 2 }}
-                  >
-                    Lanjut 💭
-                  </motion.button>
-                </motion.div>
-              )}
-            </motion.div>
-          </PageContainer>
-        )}
 
-        {/* Step 6.1: Mood Booster */}
-        {step === 6.1 && (
-          <PageContainer key="step-6.1">
+
+        {/* Step 5.1: Mood Booster */}
+        {step === 5.1 && (
+          <PageContainer key="step-5.1">
             <motion.div
               className="card"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
             >
-              <MoodBooster onComplete={() => setStep(6.2)} />
+              <MoodBooster onComplete={() => setStep(5.2)} />
             </motion.div>
           </PageContainer>
         )}
@@ -558,9 +524,59 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Step 6.2: Starry Night (Outside AnimatePresence for Fullscreen Portal Effect) */}
-      {step === 6.2 && (
-        <StarryNight onComplete={() => setStep(7)} />
+      {/* Step 5.2: Starry Night (Outside AnimatePresence for Fullscreen Portal Effect) */}
+      {step === 5.2 && (
+        <StarryNight onComplete={() => setStep(6)} />
+      )}
+
+      {/* Step 6: Plot Twist - Emotional Reveal */}
+      {step === 6 && (
+        <PageContainer key="step-6">
+          <motion.div className="card text-center">
+            <TypingText
+              text="Sebenernya… dari tadi aku perhatiin jawabanmu…"
+              speed={50}
+              className="mb-4"
+              onComplete={() => setTimeout(() => setTypingComplete(true), 1000)}
+            />
+            {typingComplete && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 }}
+              >
+                <TypingText
+                  text="Dan aku cuma pengen bilang satu hal…"
+                  speed={50}
+                  className="mb-4"
+                />
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 3, duration: 0.5 }}
+                  style={{
+                    fontSize: '1.5rem',
+                    fontWeight: 'bold',
+                    color: 'var(--color-accent)',
+                    marginTop: '2rem',
+                    marginBottom: '2rem'
+                  }}
+                >
+                  Kamu itu spesial banget 💖
+                </motion.div>
+                <motion.button
+                  className="btn btn-primary mt-4"
+                  onClick={() => { playClick(); setStep(7); setTypingComplete(false); }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 4 }}
+                >
+                  🥹
+                </motion.button>
+              </motion.div>
+            )}
+          </motion.div>
+        </PageContainer>
       )}
 
       {/* Signature Footer */}
