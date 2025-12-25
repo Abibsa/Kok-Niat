@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💐 Kok Niat - Interactive Romantic Website
 
-## Getting Started
+Sebuah website interaktif yang dibuat khusus sebagai hadiah spesial, penuh dengan animasi halus, musik romantis, dan pesan yang menyentuh hati. Project ini dirancang untuk memberikan pengalaman "digital journey" yang personal dan tak terlupakan.
 
-First, run the development server:
+![Project Preview](/public/icon-512.png) 
+*(Note: Ganti path gambar ini dengan screenshot asli aplikasi jika ada)*
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Fitur Premium
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Aplikasi ini dilengkapi dengan berbagai fitur interaktif yang dirancang untuk membangun suasana romantis:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 💌 The Experience
+*   **Envelope Opening**: Animasi pembuka berupa amplop surat 3D yang harus "dibuka" oleh pengguna.
+*   **Personalized Greeting**: Menyapa pengguna dengan nama panggilan kesayangan mereka.
+*   **Interactive Questions**: Serangkaian pertanyaan "This or That" dengan respon yang puitis dan memvalidasi perasaan.
+*   **Romantic Atmosphere**: Efek visual **Falling Petals (Sakura)** & **Hearts** yang jatuh perlahan di background.
+*   **Jurnal Memori (Recap)**: Di akhir sesi, jawaban pengguna dirangkum dalam bentuk "Jurnal Kenangan" yang manis.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🎨 Visual & Audio
+*   **3 Tema Warna**: Pilihan tema Pink (Romance), Purple (Mystery), dan Blue (Calm) yang bisa diganti realtime.
+*   **Smart Music Player**:
+    *   Pemutar musik dengan playlist otomatis (Archive.org & Pixabay).
+    *   Fitur **Auto-Fallback**: Jika satu lagu gagal diputar, otomatis pindah ke lagu cadangan.
+    *   **Force Play Strategy**: Mengatasi blokir autoplay browser dengan mendeteksi interaksi pertama.
+*   **Glassmorphism UI**: Desain modern dengan efek kaca yang elegan dan transisi yang sangat halus (Framer Motion).
+*   **Mobile-First Design**: Tampilan yang dioptimalkan khusus untuk layar HP (tombol besar, layout vertikal).
 
-## Learn More
+### ⚙️ Teknis Canggih
+*   **PWA Ready**: Bisa di-install menjadi aplikasi native di Android/iOS (icon di homescreen).
+*   **Typing Animations**: Efek teks mengetik untuk memberikan kesan "sedang berbicara".
+*   **Confetti Celebration**: Efek perayaan saat menyelesaikan perjalanan.
+*   **Local Storage**: Menyimpan progress pengguna agar tidak hilang saat di-refresh.
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Dibuat dengan teknologi web modern untuk performa maksimal:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+*   **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+*   **Language**: [TypeScript](https://www.typescriptlang.org/)
+*   **Styling**: Vanilla CSS (Optimized) + CSS Modules
+*   **Animation**: [Framer Motion](https://www.framer.com/motion/)
+*   **Audio**: HTML5 Audio API dengan Custom Logic
+*   **Icons**: [Lucide React](https://lucide.dev/) (jika digunakan) / Emoji Native
 
-## Deploy on Vercel
+## 🚀 Cara Menjalankan
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1.  **Clone Repository** (atau download folder project):
+    ```bash
+    git clone https://github.com/username/kok-niat.git
+    cd kok-niat
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2.  **Install Dependencies**:
+    ```bash
+    npm install
+    ```
+
+3.  **Jalankan Development Server**:
+    ```bash
+    npm run dev
+    ```
+
+4.  **Buka Browser**:
+    Kunjungi [http://localhost:3000](http://localhost:3000).
+
+## 📝 Konfigurasi & Kustomisasi
+
+Kamu bisa mengubah konten agar lebih personal untuk si dia:
+
+*   **Pertanyaan & Respon**:
+    Edit file `app/data.ts`. Ubah teks pertanyaan, pilihan jawaban, dan komentar romantisnya di sana.
+
+*   **Musik**:
+    Edit file `app/components/MusicPlayer.tsx`. Kamu bisa mengganti URL di variabel `playlist`.
+
+*   **Nama Aplikasi & Metadata**:
+    Edit file `app/layout.tsx` dan `public/manifest.json`.
+
+## 📱 Cara Install (PWA)
+
+1.  Buka website di browser HP (Chrome/Safari).
+2.  Klik menu "Share" (iOS) atau titik tiga (Android).
+3.  Pilih **"Add to Home Screen"** atau **"Tambahkan ke Layar Utama"**.
+4.  Aplikasi akan muncul seperti aplikasi native dengan icon hati 💖.
+
+## 💝 Credits
+
+Dibuat dengan ❤️ oleh **Abib**.
+*Special for someone special.*
+
+---
+*"Sebuah pesan tulus untuk seseorang yang spesial..."*
