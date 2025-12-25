@@ -13,15 +13,46 @@ export default function MessageBox({ userName, onSubmit, onClose }: MessageBoxPr
     const [message, setMessage] = useState('');
     const [submitted, setSubmitted] = useState(false);
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (message.trim()) {
-            onSubmit(message);
+            // Set loading state if desired (optional)
             setSubmitted(true);
+            onSubmit(message);
+
+            // Google Form Config
+            const FORM_ID = '1FAIpQLSddOBLINH6hNP78aPJ9v528hoTMppWC86EHwo2_omAWPliUOg';
+            const ENTRY_NAME = 'entry.1468764764';
+            const ENTRY_MESSAGE = 'entry.345266786';
+
+            const submitUrl = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
+
+            try {
+                // Gunakan mode 'no-cors' karena Google Forms tidak mengizinkan CORS
+                // Request akan tetap terkirim dan data masuk ke Spreadsheet
+                await fetch(submitUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        [ENTRY_NAME]: userName,
+                        [ENTRY_MESSAGE]: message,
+                    }),
+                });
+
+                console.log("Pesan terkirim ke Google Form!");
+            } catch (error) {
+                console.error("Gagal mengirim pesan:", error);
+                // Kita tetap anggap sukses di UI agar user tidak bingung
+            }
+
             setTimeout(() => {
                 onClose();
             }, 3000);
         }
     };
+
 
     return (
         <motion.div

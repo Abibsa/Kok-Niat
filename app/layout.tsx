@@ -10,7 +10,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Kok Niat - Untuk Hana 💐",
+  title: "Kok Niat - Untuk Kamu 💐",
   description: "Website interaktif lucu dan romantis yang dibuat dengan penuh perhatian",
   keywords: ["interactive", "romantic", "personal website"],
   authors: [{ name: "Kok Niat" }],
