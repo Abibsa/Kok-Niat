@@ -13,39 +13,50 @@ export default function MessageBox({ userName, onSubmit, onClose }: MessageBoxPr
     const [message, setMessage] = useState('');
     const [submitted, setSubmitted] = useState(false);
 
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
         if (message.trim()) {
-            // Set loading state if desired (optional)
             setSubmitted(true);
             onSubmit(message);
 
-            // Google Form Config
-            const FORM_ID = '1FAIpQLSddOBLINH6hNP78aPJ9v528hoTMppWC86EHwo2_omAWPliUOg';
+            // Google Form Config - Hidden Submission Technique
+            const FORM_ACTION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSddOBLINH6hNP78aPJ9v528hoTMppWC86EHwo2_omAWPliUOg/formResponse';
             const ENTRY_NAME = 'entry.1468764764';
             const ENTRY_MESSAGE = 'entry.345266786';
 
-            const submitUrl = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
+            // Create a hidden iframe
+            const iframe = document.createElement('iframe');
+            iframe.name = 'hidden_iframe';
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
 
-            try {
-                // Gunakan mode 'no-cors' karena Google Forms tidak mengizinkan CORS
-                // Request akan tetap terkirim dan data masuk ke Spreadsheet
-                await fetch(submitUrl, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: new URLSearchParams({
-                        [ENTRY_NAME]: userName,
-                        [ENTRY_MESSAGE]: message,
-                    }),
-                });
+            // Create a form
+            const form = document.createElement('form');
+            form.action = FORM_ACTION_URL;
+            form.method = 'POST';
+            form.target = 'hidden_iframe';
+            form.style.display = 'none';
 
-                console.log("Pesan terkirim ke Google Form!");
-            } catch (error) {
-                console.error("Gagal mengirim pesan:", error);
-                // Kita tetap anggap sukses di UI agar user tidak bingung
-            }
+            // Input Nama
+            const inputName = document.createElement('input');
+            inputName.name = ENTRY_NAME;
+            inputName.value = userName;
+            form.appendChild(inputName);
+
+            // Input Pesan
+            const inputMessage = document.createElement('input');
+            inputMessage.name = ENTRY_MESSAGE;
+            inputMessage.value = message;
+            form.appendChild(inputMessage);
+
+            // Submit
+            document.body.appendChild(form);
+            form.submit();
+
+            // Cleanup
+            setTimeout(() => {
+                document.body.removeChild(form);
+                document.body.removeChild(iframe);
+            }, 2000);
 
             setTimeout(() => {
                 onClose();
