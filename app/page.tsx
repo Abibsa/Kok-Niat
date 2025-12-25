@@ -16,6 +16,9 @@ import SoundEffects from './components/SoundEffects';
 import TypingText from './components/TypingText';
 import Envelope from './components/Envelope';
 import FallingElements from './components/FallingElements';
+import MoodBooster from './components/MoodBooster';
+import StarryNight from './components/StarryNight';
+
 import { getRandomQuestions, saveProgress, loadProgress, clearProgress, allQuestions } from './data';
 import type { Question } from './types';
 
@@ -119,15 +122,16 @@ export default function Home() {
       setTimeout(() => {
         setFeedback('');
         setStep(step + 1);
-      }, 300);
-    }, 2000);
+      }, 500); // Sedikit lebih lambat untuk fade out
+    }, 4000); // Beri waktu 4 detik untuk membaca teks romantis
   };
 
   const handleAbsurdAnswer = (answer: string) => {
     playClick();
     setAnswers({ ...answers, [99]: answer });
-    setTimeout(() => setStep(step + 1), 500);
+    setTimeout(() => setStep(step + 1), 1500); // Jeda lebih lama agar tidak kaget
   };
+
 
   const handleEndingChoice = () => {
     playSuccess();
@@ -393,7 +397,7 @@ export default function Home() {
                   />
                   <motion.button
                     className="btn btn-primary mt-4"
-                    onClick={() => { playClick(); setStep(7); setTypingComplete(false); }}
+                    onClick={() => { playClick(); setStep(6.1); setTypingComplete(false); }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 2 }}
@@ -405,6 +409,25 @@ export default function Home() {
             </motion.div>
           </PageContainer>
         )}
+
+        {/* Step 6.1: Mood Booster */}
+        {step === 6.1 && (
+          <PageContainer key="step-6.1">
+            <motion.div
+              className="card"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+            >
+              <MoodBooster onComplete={() => setStep(6.2)} />
+            </motion.div>
+          </PageContainer>
+        )}
+
+        {/* Step 6.2: Starry Night */}
+        {step === 6.2 && (
+          <StarryNight onComplete={() => setStep(7)} />
+        )}
+
 
         {/* Step 7: Ending */}
         {step === 7 && !showHearts && (
